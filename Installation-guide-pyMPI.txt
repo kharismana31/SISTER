@@ -1,0 +1,35 @@
+sudo apt-get install python-dev libopenmpi-dev
+
+download pyMPI *link nya gugling aja*
+extract dulu terus masuk foldernya
+./configure
+make
+*kalo error cannot find lz -> sudo apt-get install libz-dev*
+*terus di folder pyMPI -> make clean*
+*ulangi lagi dari ./configure*
+sudo make install
+
+sudo apt-get install openmpi-bin
+
+///////////////// TEST pyMPI ///////////////////////////
+buat program python
+
+////////////////// coba ini aja ////////////////////////
+import mpi
+
+if mpi.rank == 0:
+        for i in range(1,mpi.size):
+                print mpi.recv()[0]
+else:
+        mpi.send("Hello from process " + str(mpi.rank),0)
+
+/////////////////////////////////////////////////////////
+
+mpirun -np 4 /usr/bin/pyMPI hello_mpi.py
+
+
+///////////////// cek jumlah core processor pc /////////
+
+nproc
+
+/////////////////////////////////////////////////////////
